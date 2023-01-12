@@ -1,0 +1,38 @@
+<div class="d-flex justify-content-center mt-5 mb-5">
+  <div class="MyBorder p-4 rounded  ">
+
+    <div class="col-12">
+      <h2 class="text-center">Admin Login</h2>
+      <form [formGroup]="loginform" (ngSubmit)="logincheck()">
+        <div class="form-group">
+          <label for="exampleInputEmail1">Enter your Email</label>
+          <input type="email" class="form-control" id="exampleInputEmail1" formControlName="email"
+            placeholder="Enter your Email" aria-describedby="emailHelp" name="email">
+          <div *ngIf="f['email'].touched && f['email'].invalid" class="alert alert-danger mt-2">
+            <div *ngIf="f['email'].errors && f['email'].errors['required']">Email is required.</div>
+            <div *ngIf="f['email'].errors && f['email'].errors['email']">Please enter valid email
+              address.</div>
+          </div>
+          <br>
+          <label for="exampleInputPassword1">Enter your Password</label>
+          <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Enter your Password"
+            formControlName="password">
+          <div *ngIf="f['password'].touched && f['password'].invalid" class="alert alert-danger mt-2">
+            <div *ngIf="f['password'].errors && f['password'].errors['required']">Password is
+              required.</div>
+            <div *ngIf="f['password'].errors && f['password'].errors['minlength']">password should
+              be 5 character.</div>
+          </div>
+
+        </div>
+
+
+        <button [disabled]="loginform.invalid" type="submit" class="btn rounded my-4 w-100  btn-warning">Submit</button>
+
+
+
+      </form>
+    </div>
+
+  </div>
+</div>
