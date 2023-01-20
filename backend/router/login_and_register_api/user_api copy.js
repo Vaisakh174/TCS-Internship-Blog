@@ -1,25 +1,22 @@
 const express = require("express");
 const router = express.Router();
 const jwt = require('jsonwebtoken')
-const DB = require("../../schema/blogSchema.js");
-
-
-
-
+const DB = require("../../schema/blog_Schema.js");
+const bcrypt = require('bcrypt');
 
 
 
 //signup
-
+// add data (post) for users
 router.post('/register', async (req, res) => {
     // const DateNow = Date.now();
     let item = {
 
         name: req.body.name,
         email: req.body.email,
-        password: { rootUser: req.body.password },
-        roles: ['rootUser']
-
+        password: req.body.password1 ,
+        roles: 'user'
+      
     }
 
 
@@ -32,7 +29,6 @@ router.post('/register', async (req, res) => {
 
         try {
 
-            console.log(item)
             const newdata = new DB.User(item);
             const savedata = await newdata.save();
             console.log(`from post method, signup ${savedata}`);
@@ -47,15 +43,16 @@ router.post('/register', async (req, res) => {
 
     }
     else {
-        console.log("matching email found. so updating role");
+        console.log("matching email found");
 
 
-        let isRootUser = foundResults.roles.some(function (element) {
-            return element === 'rootUser';
+
+        let isUser = foundResults.roles.some((element)=> {
+            return element === 'user';
         });
 
-        if (isRootUser) {
-            res.status(401).send("Email already registered As Root USer");
+        if (isUser) {
+            res.status(401).send("Email already registered As a User");
 
 
         }
@@ -63,28 +60,26 @@ router.post('/register', async (req, res) => {
         else {
 
             console.log('res', foundResults.roles)
-            foundResults.roles.push('rootUser')
+            foundResults.roles.push('user')
             console.log('after', foundResults.roles)
 
-            item = { ...item, password: { ...foundResults.password, rootUser: req.body.password } }  //concatinate user pass and admin pass
+            item = { ...item, password: { ...foundResults.password, user: req.body.password1 } }  //concatinate user pass and admin pass
 
             DB.User.findByIdAndUpdate(
                 { "_id": foundResults._id },
-                { $set: { roles: foundResults.roles, password: item.password } }, function (err, result) {
+                { $set: { roles: foundResults.roles, password: item.password } },(err, result)=> {
                     if (err) {
-                        console.log(err);
-                        res.status(404).send("Error while updating Root USer role or Password");
+                        console.log('err', err);
+                        res.status(404).send("Error while updating user role");
                     } else {
-                        console.log(result);
-                        res.status(200).send({ status: "Email already registered. So Updating New Role As Root User" });
+                        console.log('res', result);
+                        res.status(200).send({ status: "Email already registered. So Updated new Role As User" });
                     }
                 });
         }
 
 
     }
-
-
 
 
 
@@ -103,8 +98,8 @@ router.post("/login", async (req, res) => {
         DB.User.findOne({ email: emailf }, (err, foundResults) => {
 
             if (foundResults != null) {
-                var isRootUser = foundResults.roles.some(function (element) {
-                    return element === 'rootUser';
+                var isUser = foundResults.roles.some((element)=>{
+                    return element === 'user';
                 })
             }
 
@@ -116,27 +111,28 @@ router.post("/login", async (req, res) => {
                 res.status(401).send("Email Not Found");
             }
 
-            else if (!isRootUser) {
+            else if (!isUser) {
 
 
-                res.status(401).send("invalid Root User. You Already Registered");
+                res.status(401).send("invalid User. You Already Registered");
 
-            }
-            else if (foundResults.password.rootUser != passwordf) {
+            } else if (foundResults.password.user != passwordf) {
                 console.log("error 401 invalid password")
 
                 res.status(401).send("invalid password");
 
             }
 
-            else if (foundResults.password.rootUser == passwordf) {
+            else if (foundResults.password.user == passwordf) {
                 console.log("success login with jwt user", foundResults.name)
                 let payload = { subject: emailf + passwordf }
                 let token = jwt.sign(payload, "secretkey");
-                let user = foundResults.name;
-                let role = foundResults.role;
-                res.status(200).send({ token, user, role, status: 'Login Success' });
-            } else {
+                let user_id = foundResults._id;
+                let user_name = foundResults.name;
+                let roles = foundResults.roles;
+                res.status(200).send({ token, user_id,user_name, roles, status: 'Login Success' });
+            }
+            else {
                 res.status(401).send("Unknown Error Occured");
             }
         })

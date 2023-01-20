@@ -17,39 +17,50 @@ export class AdminApiService {
 
 
   isLoggedin() {
-    return !!localStorage.getItem('admin-token')
+    return !!localStorage.getItem('admin_token')
   }
 
   getToken() {
-    return localStorage.getItem('admin-token');
+    return localStorage.getItem('admin_token');
+  } 
+   getadminname() {
+    return localStorage.getItem('admin_name');
+  }  
+   getadminid() {
+    return localStorage.getItem('admin_id');
   }
 
 
 
-  //all admin apis
-  getallapprove() {
-    return this.http.get(`${this.url}/api/approve/getall`);
+  //all post crud apis
+  getallposts() {
+    return this.http.get(`${this.url}/api/post/getall`);
   }
 
-  postApprd(data: any) {
-    return this.http.post(`${this.url}/api/approve/posted`, data);
+  newpost(data: any) {
+    return this.http.post(`${this.url}/api/post/new`, data);
   }
 
-  deletesAppr(_id: any) {
-    return this.http.delete(`${this.url}/api/approve/delete/${_id}`);
+  deletepost(_id: any) {
+    return this.http.delete(`${this.url}/api/post/delete/${_id}`);
   }
 
-  getbyidappr(_id: any) {
-    return this.http.get(`${this.url}/api/approve/getsingle/${_id}`);
+  getbyidpost(_id: any) {
+    return this.http.get(`${this.url}/api/post/getsingle/${_id}`);
   }
 
-  updateappr(data: any, _id: any) {
-    return this.http.put(`${this.url}/api/approve/update`, { data, _id });
+  updatepost(data: any, _id: any) {
+    return this.http.put(`${this.url}/api/post/update`, { data, _id });
   }
 
 
 
-
-
+  //all category apis
+  getallcategories() {
+    return this.http.get(`${this.url}/api/category/getall`);
+  } 
+  newcategory(data: any) {
+    return this.http.post(`${this.url}/api/category/new`, data);
+  }
 
 }

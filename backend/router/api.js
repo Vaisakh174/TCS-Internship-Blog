@@ -4,9 +4,17 @@ const router = express.Router();
 
 
 // for api calls
-router.use("/user", require("./login_and_register/user-api.js"));
-router.use("/admin", require("./login_and_register/admin-api.js"));
-router.use("/rootUser", require("./login_and_register/root-user-api.js"));
+
+//for login apis
+router.use("/user", require("./login_and_register_api/user_api"));
+router.use("/admin", require("./login_and_register_api/admin_api"));
+router.use("/rootUser", require("./login_and_register_api/root_user_api"));
+
+//crud apis
+router.use("/category", require("./category_api"));
+router.use("/post", require("./post_api"));
+router.use("/user", require("./user_api"));
+router.use("/comment", require("./comment_api"));
 
 
 

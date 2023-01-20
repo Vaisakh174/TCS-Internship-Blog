@@ -22,32 +22,29 @@ export class UserLoginComponent {
   })
 
 
-  
+
   get f() {
     return this.loginform.controls;
   }
 
-  logincheck(){
+  logincheck() {
     this.api.userLogin(this.loginform.value).subscribe({
-
       // console.log('res from reg. : ',res)
       next: (res) => {
-      
-        localStorage.setItem('user-token', res.token);
-        // console.log("res from login  ", res);   //to view token in browser
+        localStorage.setItem('user_token', res.token);
+        // console.log(  "res from login  ", res);   //to view token in browser
+        localStorage.setItem('user_name', res.user_name);
+        // localStorage.setItem('user_role', res.role);
+        localStorage.setItem('user_id', res.user_id);
         alert(res.status);
-        localStorage.setItem('user-name', res.user);
-        // localStorage.setItem('user-role', res.role);
         this.router.navigate(['/userhome']);
-      
       },
       error: (err) => {
-      
         console.log("error from login ", err);     //to view error in browser
         alert(`Error...  ${err.error}`);
-      
+        this.loginform.reset()
       }
-      })
+    })
   }
 
 }

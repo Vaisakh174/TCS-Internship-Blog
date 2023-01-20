@@ -33,24 +33,20 @@ export class UserRegistrationComponent {
       alert('Re-Entered Password Miss-Match')
     }
     else {
-this.api.userRegister(this.addUser.value).subscribe({
+      this.api.userRegister(this.addUser.value).subscribe({
 
-// console.log('res from reg. : ',res)
-next: (res) => {
-
- 
-  // console.log("success from reg  ", res);   //to view token in browser
-  alert(res.status);
-  this.router.navigate(['/user']);
-
-},
-error: (err) => {
-
-  // console.log("error from reg ", err);     //to view error in browser
-  alert(`Error...  ${err.error}`);
-
-}
-})
+        // console.log('res from reg. : ',res)
+        next: (res) => {
+          // console.log("success from reg  ", res);   //to view token in browser
+          alert(res.status);
+          this.router.navigate(['/user']);
+        },
+        error: (err) => {
+          // console.log("error from reg ", err);     //to view error in browser
+          alert(`Error...  ${err.error}`);
+          this.addUser.reset()
+        }
+      })
 
     }
 

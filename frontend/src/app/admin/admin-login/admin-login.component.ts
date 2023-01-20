@@ -21,33 +21,33 @@ export class AdminLoginComponent {
   })
 
 
-  
+
   get f() {
     return this.loginform.controls;
   }
 
-  logincheck(){
+  logincheck() {
     // console.log('val= ',this.loginform.value)
     this.api.adminLogin(this.loginform.value).subscribe({
 
       // console.log('res from reg. : ',res)
       next: (res) => {
-      
-        localStorage.setItem('admin-token', res.token);
-        // console.log("res from login  ", res);   //to view token in browser
+
+        localStorage.setItem('admin_token', res.admin_token);
+        console.log("res from login  ", res);   //to view token in browser
+        localStorage.setItem('admin_name', res.admin_name);
+        localStorage.setItem('admin_id', res.admin_id);
         alert(res.status);
-        localStorage.setItem('admin-name', res.user);
-        // localStorage.setItem('user-role', res.role);
         this.router.navigate(['/adminhome']);
-      
+
       },
       error: (err) => {
-      
+        this.loginform.reset()
         console.log("error from login ", err);     //to view error in browser
         alert(`Error...  ${err.error}`);
-      
+
       }
-      })
+    })
 
   }
 

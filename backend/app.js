@@ -2,7 +2,7 @@ const express = require("express");
 const app = new express();
 const cors = require("cors");//communication
 const logger = require("morgan");//to view api call on terminal
-const GMT00 = require("./convertGMT00toIST.js");
+const GMT00 = require("./convertGMT00toIST");
 
 // to pass data from frontend to backend.  use => while starting the app, use is executed
 app.use(express.json());//json pair
@@ -11,10 +11,10 @@ app.use(cors());
 app.use(logger("dev"));//morgan
 
 // for env file
-require ('dotenv').config();  
+require('dotenv').config();
 
 // mongodb
-require("./mongoURI/mongodb.js");
+require("./middlewares/mongodb_connect");
 
 
 // for hosting to herokku
@@ -25,7 +25,7 @@ app.use(express.static(path.join(__dirname + "/dist/frontend")));
 
 
 // for api calls
-const api = require("./router/api.js");
+const api = require("./router/api");
 app.use("/api", api);
 
 // for heroku
@@ -38,5 +38,6 @@ app.get('/*', function (req, res) {
 const port = process.env.PORT || 3000;
 app.listen(port, () => {
     console.log(`........port is now connected at ${port} ........`);
-   console.log( GMT00.getCurrentTimeInIST());
+    console.log(GMT00.getCurrentTimeInIST());
+
 });

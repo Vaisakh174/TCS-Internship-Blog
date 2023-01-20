@@ -8,13 +8,23 @@ import { UserLoginComponent } from './user-login/user-login.component';
 import { UserRegistrationComponent } from './user-registration/user-registration.component';
 import { HttpClientModule } from '@angular/common/http';
 import { UserHomeComponent } from './user-home/user-home.component';
+import { ViewBlogsComponent } from './view-blogs/view-blogs.component';
+import { PostABlogComponent } from './post-a-blog/post-a-blog.component';
+import { EditPostComponent } from './edit-post/edit-post.component';
+import { EditUserComponent } from './edit-user/edit-user.component';
+import { ViewCategoriesComponent } from './view-categories/view-categories.component';
 
 
 @NgModule({
   declarations: [
     UserLoginComponent,
     UserRegistrationComponent,
-    UserHomeComponent
+    UserHomeComponent,
+    ViewBlogsComponent,
+    PostABlogComponent,
+    EditPostComponent,
+    EditUserComponent,
+    ViewCategoriesComponent
   ],
   imports: [
     CommonModule,

@@ -6,13 +6,25 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
 import { AdminHomeComponent } from './admin-home/admin-home.component';
+import { ManagePostsComponent } from './manage-posts/manage-posts.component';
+import { ManageCategoryComponent } from './manage-category/manage-category.component';
+import { ReadMorePostComponent } from './read-more-post/read-more-post.component';
+import { EditAPostComponent } from './edit-a-post/edit-a-post.component';
+import { CreatePostComponent } from './create-post/create-post.component';
+import { CreateCategoryComponent } from './create-category/create-category.component';
 
 
 @NgModule({
   declarations: [
   
     AdminLoginComponent,
-       AdminHomeComponent
+       AdminHomeComponent,
+       ManagePostsComponent,
+       ManageCategoryComponent,
+       ReadMorePostComponent,
+       EditAPostComponent,
+       CreatePostComponent,
+       CreateCategoryComponent
   ],
   imports: [
     CommonModule,

@@ -1,0 +1,30 @@
+<div *ngIf="api.isLoggedin()" class="d-flex justify-content-center">
+    <div class="p-3 rounded MyBorder my-4">
+        <div class="  rounded  p-3 ">
+
+            <div class="col-12 ">
+                <div class="d-flex justify-content-between">
+                    <div>
+                        <h2>{{post.title}}</h2>
+                        <p>(By : {{post.user_name}})</p>
+                        <p>Category: {{post.category}}</p>
+                        <p>Date: {{post.date}}</p>
+                    </div>
+                    <div>
+
+                        <button title=" Click Here To close" routerLink="/adminhome"
+                            class="btn-danger my-2 btn btn-sm">Close</button>
+
+
+                    </div>
+                </div>
+
+                <hr>
+                <p class="justify">{{post.content}}</p>
+
+
+
+            </div>
+        </div>
+    </div>
+</div>
