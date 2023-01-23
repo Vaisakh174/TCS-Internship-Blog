@@ -16,7 +16,7 @@ export class CreatePostComponent {
   }
 
   categoris: any
-
+  loaderShow:any
 
   editpost: any = new FormGroup({
     title: new FormControl("", [Validators.required, Validators.minLength(5)]),
@@ -27,9 +27,11 @@ export class CreatePostComponent {
 
 
   getdata() {
+    this.loaderShow=true
     this.api.getallcategories().subscribe((res) => {
       this.categoris = res
       // console.log(this.categoris)
+      this.loaderShow=false
     })
   }
 
@@ -37,16 +39,18 @@ export class CreatePostComponent {
 
   submit() {
 
-
+    this.loaderShow=true
     this.editpost.value = { ...this.editpost.value, "user_id": this.api.getadminid(), "user_name": this.api.getadminname() }
     // console.log('aas', this.editpost.value)
     this.api.newpost(this.editpost.value).subscribe({
       next: (res => {
+        this.loaderShow=false
         alert("Data saved successfully");
         // console.log("incoming data from blog post", res);
         this.router.navigate(['/adminhome']);
       }),
       error: (err => {
+        this.loaderShow=false
         alert(`Error occured ${err.error}`)
 
       })

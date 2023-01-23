@@ -31,7 +31,7 @@ body {
 
 .loading {
     position: fixed;
-    overflow-y: scroll;
+    // overflow-y: scroll;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
@@ -41,7 +41,7 @@ body {
     align-items: center;
     justify-content: center;
     z-index: 2313;
-    background-color: rgba(0, 0, 0, 0.5);
+    background-color: rgba(0, 0, 0, 0.75);
     color: white;
 
 }

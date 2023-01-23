@@ -1,0 +1,45 @@
+<table *ngIf="api.isLoggedin()" class="table table-success table-striped text-center">
+    <thead>
+        <tr class="text-danger">
+            <th scope="col">#</th>
+            <th scope="col">Name</th>
+            <th scope="col">Email</th>
+            <th scope="col">Date of Join</th>
+          
+            <th scope="col">User_ID</th>
+           
+            <th scope="col">Functions</th>
+
+
+
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let data of viewusers let i=index ">
+            <th scope="row">{{i+1}}</th>
+            <td>{{data.name}}</td>
+            <td>{{data.email}}</td>
+            <td>{{data.date}}</td>
+            <td>{{data._id}}</td>
+            <td>
+
+                <button (click)="deletes(data._id)" type="button"
+                    class="btn  m-1 btn-sm btn-danger ">Delete</button>
+                <button (click)="edit (data._id)" type="button" class="btn  m-1 btn-warning btn-sm ">Edit</button>
+                <button (click)="approve (data._id)" type="button" class="btn  m-1 btn-info btn-sm ">Approve As Admin</button>
+                <button (click)="readmore (data._id)" type="button" class="btn  m-1 btn-sm btn-success">Read User Posts
+                </button>
+            </td>
+        </tr>
+
+    </tbody>
+</table>
+
+<div *ngIf="loaderShow">
+    <div class="loading">
+      <div class="text-center">
+        <div class="spinner-border m-3 text-light " style="width: 3rem; height: 3rem;" role="status"> </div>
+        <h6>Please Wait While Loading...</h6>
+      </div>
+    </div>
+  </div>

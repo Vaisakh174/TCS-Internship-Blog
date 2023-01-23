@@ -15,6 +15,7 @@ export class ViewBlogsComponent {
     this.getdata();
   }
 
+  loaderShow:any
 
   posts: any = [{
     title: '',
@@ -31,14 +32,14 @@ export class ViewBlogsComponent {
     post_id: ''
   }]
 
-  _loaderShow = false;
+
   i = 0;
   postLength = 0;
   flag = 0
   editAcommentflag = false
 
   getdata() {
-    // this._loaderShow=true;
+    this.loaderShow=true;
     this.i = 0
     this.api.getallposts().subscribe({
       next: (res) => {
@@ -47,9 +48,10 @@ export class ViewBlogsComponent {
         this.postLength = this.posts.length - 1
         this.check_user()
         this.getcomments()
-
+        this.loaderShow=false
       },
       error: (err) => {
+        this.loaderShow=false
         alert(err.error)
       }
 
@@ -65,9 +67,11 @@ export class ViewBlogsComponent {
   })
 
   submitComment() {
+    this.loaderShow=true
     this.commentform.value = { ...this.commentform.value, "user_id": this.api.getuser_id(), "user_name": this.api.getuser_name(), "post_id": this.posts[this.i]._id }
     // console.log('commentform:', this.commentform.value)
     this.api.newcomment(this.commentform.value).subscribe((res) => {
+      this.loaderShow=false
       alert('Your Comment is Now Posted')
       this.getcomments()
       this.commentform.reset()
@@ -92,13 +96,15 @@ export class ViewBlogsComponent {
   }
   del: any
   Deletecomment(_id: any) {
+    this.loaderShow=true
     this.api.deletecomment(_id).subscribe({
       next: (res) => {
         this.del = res
+        this.loaderShow=false
         alert(this.del.status)
         this.getcomments()
       }, error: (err) => {
-
+        this.loaderShow=false
         alert(err.error)
       }
     })
@@ -109,20 +115,25 @@ export class ViewBlogsComponent {
 
   edit_id: any
   Editcomment(_id: any) {
+    this.loaderShow=true
     this.editAcommentflag = true
     this.edit_id = _id
+    this.loaderShow=false
   }
 
   updateresp: any
   updateComment() {
+    this.loaderShow=true
     this.api.updatecomment(this.editform.value, this.edit_id).subscribe({
       next: (res) => {
         this.updateresp = res
+        this.loaderShow=false
         alert(this.updateresp.status)
         this.close()
         this.getcomments()
         this.editform.reset()
       }, error: (err) => {
+        this.loaderShow=false
         alert(err.error)
       }
     })
@@ -136,18 +147,23 @@ export class ViewBlogsComponent {
   }
 
   previous() {
+    this.loaderShow=true
     if (this.i != 0) {
       this.i--
       this.check_user()
       this.getcomments()
+      this.loaderShow=false
     }
     else {
+      this.loaderShow=false
       alert('You Reached First Post')
     }
+
   }
 
   latestComment = ""
   getcomments() {
+    // this.loaderShow=true
     this.api.getcommentbyid(this.posts[this.i]._id).subscribe((res) => {
       this.comments = res
 
@@ -156,44 +172,54 @@ export class ViewBlogsComponent {
       } else {
         this.latestComment = 'Sorry No Comment Posted Yet'
       }
+      // this.loaderShow=false
     })
   }
 
 
   next() {
+    this.loaderShow=true
     if (this.postLength > this.i) {
       this.i++
       this.check_user()
       this.getcomments()
-
+      this.loaderShow=false
     }
     else {
+      this.loaderShow=false
       alert('You Reached Last Post')
     }
+    
   }
 
   edit() {
+    this.loaderShow=true
     if (this.flag == 0) {
       this.router.navigate([`/userhome/edit-post/${this.posts[this.i]._id}`])
     } else {
       alert('You are Not Owner of This Post')
-    }
+    }    
+    this.loaderShow=false
   }
 
 
   deletes() {
+    this.loaderShow=true
     if (this.flag == 0) {
       this.api.deletepost(this.posts[this.i]._id).subscribe({
         next: (res) => {
           this.getdata()
+          this.loaderShow=false
           alert('Post is Now Deleted')
         },
         error: (err) => {
+          this.loaderShow=false
           alert(`Error... ${err.error}`)
         }
       })
     }
     else {
+      this.loaderShow=false
       alert('You are Not Owner of This Post')
     }
   }

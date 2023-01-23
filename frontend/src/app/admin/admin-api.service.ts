@@ -48,6 +48,10 @@ export class AdminApiService {
   getbyidpost(_id: any) {
     return this.http.get(`${this.url}/api/post/getsingle/${_id}`);
   }
+  
+  searchpostbycategory(category: any) {
+    return this.http.get(`${this.url}/api/post/category/${category}`);
+  }
 
   updatepost(data: any, _id: any) {
     return this.http.put(`${this.url}/api/post/update`, { data, _id });
@@ -62,5 +66,15 @@ export class AdminApiService {
   newcategory(data: any) {
     return this.http.post(`${this.url}/api/category/new`, data);
   }
+  deletecategory(_id: any) {
+    return this.http.delete(`${this.url}/api/category/delete/${_id}`);
+  }
+  updatecategory(data: any, _id: any) {
+    return this.http.put(`${this.url}/api/category/update`, { data, _id });
+  }
+  getbyidcategory(_id: any) {
+    return this.http.get(`${this.url}/api/category/getsingle/${_id}`);
+  }
+
 
 }

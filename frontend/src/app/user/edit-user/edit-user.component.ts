@@ -17,6 +17,7 @@ export class EditUserComponent {
     this.getdata()
   }
 
+  loaderShow:any
   _id: any
   user: any
   data: any
@@ -31,29 +32,26 @@ export class EditUserComponent {
   })
 
   getdata() {
+    this.loaderShow=true
     this.api.getAuser(this._id).subscribe((res) => {
       this.user = res
       this.email = this.user.email
       console.log(this.user)
+      this.loaderShow=false
     })
   }
 
-  // setvalues() {
-  //   this.editUser.setValue({
-  //     name: this.user.name,
-  //     email: this.user.email,
-  //     password1: this.user.password.user,
-  //     passwors2: this.user.password.user
-  //   })
-  // }
+
 
   get f() {
     return this.editUser.controls;
   }
 
   submit() {
+    this.loaderShow=true
     if (this.editUser.value.password1 != this.editUser.value.password2) {
       console.log('pass not match')
+      this.loaderShow=false
       alert('Re-Entered Password Miss-Match')
     }
     else {
@@ -62,12 +60,14 @@ export class EditUserComponent {
         next: (res) => {
           this.data = res
           // console.log("success from reg  ", res);   //to view token in browser
+          this.loaderShow=false
           alert(this.data.status);
           localStorage.clear()
           this.router.navigate(['/user']);
         },
         error: (err) => {
           // console.log("error from reg ", err);     //to view error in browser
+          this.loaderShow=false
           alert(`Error...  ${err.error}`);
           this.editUser.reset()
         }

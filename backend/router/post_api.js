@@ -68,6 +68,23 @@ router.get('/category/:category', async (req, res) => {
 });
 
 
+router.get('/search/:_id', async (req, res) => {
+    try {
+        let list = await DB.Post.find({user_id:req.params._id}).sort({ "_id": -1 });
+        if (list.length>0) {
+            console.log('Your Posts are Fetched Successfully');
+            res.status(200).json(list);
+        } else {
+            console.log(`No data found`);
+            res.status(404).send('No data found');
+        }
+    } catch (error) {
+        console.log(`Error from post getall catch: ${error.message}`);
+        res.status(500).send(error.message);
+    }
+});
+
+
 
 // fetch single data (get)
 router.get('/getsingle/:id', async (req, res) => {

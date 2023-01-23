@@ -13,6 +13,7 @@ export class FirstContentComponent {
   ngOnInit(): void {
     this.getdata();
   }
+  loaderShow:any
 
   posts: any = [{
     title: 'aaa',
@@ -35,7 +36,7 @@ export class FirstContentComponent {
   postLength = 0;
 
   getdata() {
-    // this._loaderShow=true;
+    this.loaderShow=true;
     this.i = 0
     this.api.getallposts().subscribe({
       next: (res) => {
@@ -43,16 +44,18 @@ export class FirstContentComponent {
         this.posts = res
         this.postLength = this.posts.length - 1
         this.getcomments()
+        this.loaderShow=false
       },
 
       error: (err) => {
+        this.loaderShow=false
         alert(err.error)
       }
     })
 
   }
 
-  previous() {
+  previous() {this.loaderShow=true
     if (this.i != 0) {
       this.i--
       this.getcomments()
@@ -60,16 +63,17 @@ export class FirstContentComponent {
     else {
       alert('You Reached First Post')
     }
+    this.loaderShow=false
   }
 
-  next() {
+  next() {this.loaderShow=true
     if (this.postLength > this.i) {
       this.i++
       this.getcomments()
     }
     else {
       alert('You Reached Last Post')
-    }
+    }    this.loaderShow=false
   }
 
 

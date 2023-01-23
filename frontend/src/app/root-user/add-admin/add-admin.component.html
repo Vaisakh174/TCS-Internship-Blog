@@ -1,0 +1,97 @@
+<div *ngIf="api.isLoggedin" class="d-flex justify-content-center m-2  my-5 ">
+    <div class="rounded MyBorder  p-4 ">
+        <div class="col-12">
+
+            <div class="d-flex ">
+                <div class="p-2 w-100">
+                    <h2>Add Admin </h2>
+                </div>
+                <div class="p-2 flex-shrink-1">
+                    <div title="Close"> <button routerLink="/rootuserhome"
+                            class="btn-danger  my-2 btn btn-sm">Close</button></div>
+                </div>
+            </div>
+            <form [formGroup]="addAdmin" (ngSubmit)="submit()">
+                <div class="form-group ">
+
+                    <label for="exampleInputEmail1">Enter your Name</label>
+
+                    <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
+                        placeholder="Enter your Name" formControlName="name">
+
+                    <div *ngIf="f['name'].touched && f['name'].invalid" class="alert alert-danger mt-2">
+                        <div *ngIf="f['name'].errors && f['name'].errors['required']">Name is required.</div>
+                        <div *ngIf="f['name'].errors && f['name'].errors['minlength']">Name should be 3
+                            character.</div>
+                    </div>
+
+                    <br>
+
+                    <label for="exampleInputEmail2">Your Email</label>
+
+                    <div title="Once Registered You Cannot Edit Your Email"><input type="email" class="form-control"
+                            id="exampleInputEmail2" aria-describedby="emailHelp" placeholder="Enter your Email"
+                            formControlName="email"></div>
+
+
+
+                    <br>
+
+                    <label for="exampleInputPassword1">Enter your Password</label>
+
+                    <input type="password" class="form-control" id="exampleInputPassword1" formControlName="password1"
+                        placeholder="Enter your Password1">
+                    <div *ngIf=" (f['password1'].touched && f['password1'].invalid)" class="alert alert-danger mt-2">
+                        <div *ngIf="f['password1'].errors && f['password1'].errors['required']">password is required.
+                        </div>
+                        <div *ngIf="f['password1'].errors && f['password1'].errors['minlength']">password should be 5
+                            characters.</div>
+                    </div>
+
+                    <br>
+
+                    <label for="exampleInputPassword2">Re-Enter Your Password</label>
+
+                    <input type="password" class="form-control" id="exampleInputPassword2" formControlName="password2"
+                        placeholder="Enter your Password2">
+
+                    <div *ngIf="f['password2'].touched && f['password2'].invalid" class="alert alert-danger mt-2">
+                        <div *ngIf="f['password2'].errors && f['password2'].errors['required']">password is
+                            required.</div>
+                        <div *ngIf="f['password2'].errors && f['password2'].errors['minlength']">password should
+                            be 5 character.</div>
+
+                    </div>
+
+                    <div *ngIf="f['password1'].valid&&f['password2'].valid">
+                        <div class="alert alert-danger mt-2" *ngIf="addAdmin.value.password1!=addAdmin.value.password2">
+                            Re-Entered Password
+                            Miss-Match.</div>
+                    </div>
+
+                    <br>
+                    <!-- <small class="text-warning">*If you change registration details,you need to login again</small> -->
+
+                </div>
+                <div class="d-flex justify-content-between">
+                    <button [disabled]="(addAdmin.invalid)||(addAdmin.value.password1 !== addAdmin.value.password2)"
+                        type="submit" class="btn rounded my-2 btn-warning">Submit</button>
+
+
+
+                </div>
+            </form>
+
+        </div>
+    </div>
+
+</div>
+
+<div *ngIf="loaderShow">
+    <div class="loading">
+      <div class="text-center">
+        <div class="spinner-border m-3 text-light " style="width: 3rem; height: 3rem;" role="status"> </div>
+        <h6>Please Wait While Loading...</h6>
+      </div>
+    </div>
+  </div>

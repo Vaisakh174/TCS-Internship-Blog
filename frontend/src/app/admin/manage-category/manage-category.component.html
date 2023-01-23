@@ -1,26 +1,80 @@
+<table *ngIf="api.isLoggedin()" class="table table-success table-striped text-center">
+    <thead>
+        <tr class="text-danger">
+            <th scope="col">#</th>
+
+            <th scope="col">Category Name</th>
+            <th scope="col">Date</th>
+            <th scope="col">Category Id</th>
+            <th scope="col">Function</th>
 
 
 
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let data of viewcategory let i=index ">
+            <th scope="row">{{i+1}}</th>
 
+            <td>{{data.category}}</td>
+            <td>{{data.date}}</td>
+            <td>{{data._id}}</td>
 
+            <td>
 
-
-
-
-<div *ngIf="read_cat_close">
-    <div *ngIf="api.isLoggedin()" class="d-flex justify-content-center loading">
-        <div class="p-3 rounded MyBorder mt-4">
-            <div class="  d-flex justify-content-end  ">
-
-                <button click="close(){}" class="btn  m-1 btn-sm btn-success">
-                    close
+                <button (click)="deletes(data._id)" type="button" class="btn  m-1 btn-sm btn-danger ">Delete</button>
+                <button (click)="edit (data._id)" type="button" class="btn  m-1 btn-warning btn-sm ">Edit</button>
+                <button (click)="readmore (data.category)" type="button" class="btn  m-1 btn-sm btn-success">ReadPosts
                 </button>
+            </td>
+        </tr>
+
+    </tbody>
+</table>
+
+
+
+
+
+
+
+<div *ngIf="editEnable">
+    <div *ngIf="api.isLoggedin()" class="loading">
+        <div class="p-4 rounded MyBorder ">
+            <div class="  d-flex justify-content-between   ">
+                <h3>Edit Category</h3>
+                <button (click)="closeEditform()" class="btn  m-1 btn-sm btn-danger">Close</button>
             </div>
-            <div class="  d-flex justify-content-center  ">
-                <p>{{categories.content}} </p>
+            <hr>
+
+            <div class="  p-3a  ">
+
+
+                <form [formGroup]="editcategory" (ngSubmit)="submit()">
+                    <div class="form-group  ">
+
+
+                        <label>Enter Category Name</label>
+                        <input type="text" class="form-control my-2 " placeholder="minimum 3 letters required"
+                            formControlName="category">
+
+
+                    </div>
+                    <button [disabled]="editcategory.invalid" type="submit"
+                        class="btn rounded my-2 btn-warning">Submit</button>
+                </form>
 
 
             </div>
         </div>
     </div>
 </div>
+
+<div *ngIf="loaderShow">
+    <div class="loading">
+      <div class="text-center">
+        <div class="spinner-border m-3 text-light " style="width: 3rem; height: 3rem;" role="status"> </div>
+        <h6>Please Wait While Loading...</h6>
+      </div>
+    </div>
+  </div>

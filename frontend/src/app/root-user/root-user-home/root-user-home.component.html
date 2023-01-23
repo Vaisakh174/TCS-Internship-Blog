@@ -1,1 +1,70 @@
-<p>root-user-home works!</p>
+<nav class="navbar  bgnav ">
+    <div class="container-fluid ">
+        <!-- <a class="navbar-brand" href="#">Offcanvas navbar</a> -->
+        <button class="navbar-toggler bg-light " type="button" data-bs-toggle="offcanvas"
+            data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="d-flex justify-content-end ">
+            <button *ngIf="api.isLoggedin()" class=" adminWelcome" type="button">Wecome To RootUser Pannel</button>
+            <button *ngIf="api.isLoggedin()" class="user " type="button">RootUser Name: {{username}} </button>
+            <button class="logout " (click)="logout()" type="button">Log out</button>
+        </div>
+
+        <div class="offcanvas offcanvas-start " tabindex="-1" id="offcanvasNavbar"
+            aria-labelledby="offcanvasNavbarLabel">
+
+            <div class="offcanvas-header">
+                <h5 class="offcanvas-title" id="offcanvasNavbarLabel"> Dashboard</h5>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas"
+                    aria-label="Close"></button>
+            </div>
+
+            <div class="offcanvas-body">
+
+                <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
+
+                    <li class="nav-item">
+                        <a class="nav-link nav-bg" *ngIf="api.isLoggedin()" routerLink="/rootuserhome/manage_admins"
+                            routerLinkActive="canvas-actived" [routerLinkActiveOptions]="{exact:true}">Manage Admins </a>
+                    </li>
+
+
+                    <li class="nav-item">
+                        <a class="nav-link nav-bg" *ngIf="api.isLoggedin()" routerLink="/rootuserhome/manage_users"
+                            routerLinkActive="canvas-actived">Manage Users</a>
+                    </li>  
+                    
+                    <li class="nav-item">
+                        <a class="nav-link nav-bg" *ngIf="api.isLoggedin()" routerLink="/rootuserhome/add-admin"
+                            routerLinkActive="canvas-actived">Add Admin</a>
+                    </li> 
+                    
+                    <!-- <li class="nav-item">
+                        <a class="nav-link nav-bg" *ngIf="api.isLoggedin()" routerLink="/rootuserhome/approve-user"
+                            routerLinkActive="canvas-actived">Approve User</a>
+                    </li> -->
+
+
+                </ul>
+
+
+            </div>
+        </div>
+    </div>
+</nav>
+
+
+
+
+<router-outlet></router-outlet>
+
+<div *ngIf="loaderShow">
+    <div class="loading">
+      <div class="text-center">
+        <div class="spinner-border m-3 text-light " style="width: 3rem; height: 3rem;" role="status"> </div>
+        <h6>Please Wait While Loading...</h6>
+      </div>
+    </div>
+  </div>

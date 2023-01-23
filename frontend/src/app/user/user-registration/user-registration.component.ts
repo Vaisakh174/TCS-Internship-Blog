@@ -15,6 +15,8 @@ export class UserRegistrationComponent {
   ngOnInit(): void {
   }
 
+  loaderShow:any
+
   addUser: any = new FormGroup({
     name: new FormControl("", [Validators.required, Validators.minLength(5)]),
     email: new FormControl("", [Validators.required, Validators.email, Validators.minLength(5)]),
@@ -28,6 +30,7 @@ export class UserRegistrationComponent {
 
 
   checkRegistration() {
+    this.loaderShow=true
     if (this.addUser.value.password1 != this.addUser.value.password2) {
       console.log('pass not match')
       alert('Re-Entered Password Miss-Match')
@@ -38,11 +41,13 @@ export class UserRegistrationComponent {
         // console.log('res from reg. : ',res)
         next: (res) => {
           // console.log("success from reg  ", res);   //to view token in browser
+          this.loaderShow=false
           alert(res.status);
           this.router.navigate(['/user']);
         },
         error: (err) => {
           // console.log("error from reg ", err);     //to view error in browser
+          this.loaderShow=false
           alert(`Error...  ${err.error}`);
           this.addUser.reset()
         }

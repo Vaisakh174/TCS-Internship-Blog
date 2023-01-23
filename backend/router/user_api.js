@@ -106,8 +106,8 @@ router.put('/update', async (req, res) => {
             { $set: item }
         )
         if (list) {
-            console.log('Your Post is Updated Successfully. Please Login Again');
-            res.status(200).json({ status: 'Your Post is Updated Successfully. Please Login Again' });
+            console.log('Your user is Updated Successfully.');
+            res.status(200).json({ status: 'User Data is Updated Successfully.' });
         } else {
             console.log(`No data found`);
             res.status(500).send(`No data found`);

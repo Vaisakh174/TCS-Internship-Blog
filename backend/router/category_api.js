@@ -90,18 +90,8 @@ router.put('/update', async (req, res) => {
     try {
         let id = req.body._id;
         let item = {
-            Jobname: req.body.data.Jobname,
-            CompanyName: req.body.data.CompanyName,
-            Place: req.body.data.Place,
-            Salary: req.body.data.Salary,
-            JobType: req.body.data.JobType,
-            Qualifications: req.body.data.Qualifications,
-            JobDescription: req.body.data.JobDescription,
-            Experience: req.body.data.Experience,
-            Benefits: req.body.data.Benefits,
-            Schedule: req.body.data.Schedule,
-            Language: req.body.data.Language,
-            Contact: req.body.data.Contact
+            
+            category: req.body.data.category
         }
         // console.log("incoming data from update", req.body);
         let list = await DB.Category.findByIdAndUpdate(

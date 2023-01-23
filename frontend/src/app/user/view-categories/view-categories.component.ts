@@ -31,6 +31,7 @@ export class ViewCategoriesComponent {
     post_id: ''
   }]
   
+  loaderShow:any
   not_found = false
   j = 0;
   postLength = 0;
@@ -45,6 +46,7 @@ export class ViewCategoriesComponent {
   })
 
   getdata() {
+    this.loaderShow=true
     this.j = 0;
     this.not_found = true
     this.api.getallcategories().subscribe((res) => {
@@ -59,9 +61,11 @@ export class ViewCategoriesComponent {
           this.postLength = this.posts.length - 1
           this.check_user()
           this.getcomments()
+          this.loaderShow=false
         },
         error: (err) => {
           this.not_found = true
+          this.loaderShow=false
         }
       })
     })
@@ -69,6 +73,7 @@ export class ViewCategoriesComponent {
 
 
   goToCategory(cat: any) {
+    this.loaderShow=true
     this.j = 0
     this.api.getpostbycategory(cat).subscribe({
       next: (res) => {
@@ -78,10 +83,11 @@ export class ViewCategoriesComponent {
         this.postLength = this.posts.length - 1
         this.check_user()
         this.getcomments()
+        this.loaderShow=false
       },
       error: (err) => {
         this.not_found = true
-
+        this.loaderShow=false
       }
     })
   }
@@ -101,6 +107,7 @@ export class ViewCategoriesComponent {
   }
 
   previous() {
+    this.loaderShow=true
     if (this.j != 0) {
       this.j--
       this.check_user()
@@ -109,9 +116,10 @@ export class ViewCategoriesComponent {
     else {
       alert('You Reached First Post')
     }
+    this.loaderShow=false
   }
 
-  next() {
+  next() {this.loaderShow=true
     if (this.postLength > this.j) {
       this.j++
       this.check_user()
@@ -119,19 +127,19 @@ export class ViewCategoriesComponent {
     }
     else {
       alert('You Reached Last Post')
-    }
+    }    this.loaderShow=false
   }
 
-  edit() {
+  edit() {this.loaderShow=true
     if (this.flag == 0) {
       this.router.navigate([`/userhome/edit-post/${this.posts[this.j]._id}`])
     } else {
       alert('You are Not Owner of This Post')
-    }
+    }    this.loaderShow=false
   }
 
 
-  deletes() {
+  deletes() {this.loaderShow=true
     if (this.flag == 0) {
       this.api.deletepost(this.posts[this.j]._id).subscribe({
         next: (res) => {
@@ -145,13 +153,14 @@ export class ViewCategoriesComponent {
     }
     else {
       alert('You are Not Owner of This Post')
-    }
+    }    this.loaderShow=false
   }
 
-  submitComment() {
+  submitComment() {this.loaderShow=true
     this.commentform.value = { ...this.commentform.value, "user_id": this.api.getuser_id(), "user_name": this.api.getuser_name(), "post_id": this.posts[this.j]._id }
     // console.log('commentform:', this.commentform.value)
     this.api.newcomment(this.commentform.value).subscribe((res) => {
+      this.loaderShow=false
       alert('Your Comment is Now Posted')
       this.getcomments()
       this.commentform.reset()
@@ -161,13 +170,15 @@ export class ViewCategoriesComponent {
 
   del: any
   Deletecomment(_id: any) {
+    this.loaderShow=true
     this.api.deletecomment(_id).subscribe({
       next: (res) => {
         this.del = res
+        this.loaderShow=false
         alert(this.del.status)
         this.getcomments()
       }, error: (err) => {
-
+        this.loaderShow=false
         alert(err.error)
       }
     })
@@ -177,21 +188,25 @@ export class ViewCategoriesComponent {
 
   editAcommentflag = false
   edit_id: any
-  Editcomment(_id: any) {
+  Editcomment(_id: any) {this.loaderShow=true
     this.editAcommentflag = true
     this.edit_id = _id
+    this.loaderShow=false
   }
 
   updateresp: any
   updateComment() {
+    this.loaderShow=true
     this.api.updatecomment(this.editform.value, this.edit_id).subscribe({
       next: (res) => {
         this.updateresp = res
+        this.loaderShow=false
         alert(this.updateresp.status)
         this.close()
         this.getcomments()
         this.editform.reset()
       }, error: (err) => {
+        this.loaderShow=false
         alert(err.error)
       }
     })

@@ -22,17 +22,29 @@ export class UserApiService {
   }
 
 
-  isLoggedin() {
+
+  //for auth redirect
+  isUserLoggedin() {
     return !!localStorage.getItem('user_token')
   }
-
-  getuser_token() {
-    return  localStorage.getItem('user_token');
-  } 
-  getuser_name() {
-    return  localStorage.getItem('user_name');
+  isAdminLoggedin() {
+    return !!localStorage.getItem('admin_token')
   }
-   getuser_id() {
+  isRootUserLoggedin() {
+    return !!localStorage.getItem('root_token')
+  }
+
+
+
+
+  //for user check
+  getuser_token() {
+    return localStorage.getItem('user_token');
+  }
+  getuser_name() {
+    return localStorage.getItem('user_name');
+  }
+  getuser_id() {
     return localStorage.getItem('user_id');
   }
 
@@ -61,7 +73,7 @@ export class UserApiService {
     return this.http.put(`${this.url}/api/post/update`, { data, _id });
   }
 
- getpostbycategory(data: any) {
+  getpostbycategory(data: any) {
     return this.http.get(`${this.url}/api/post/category/${data}`);
   }
 
@@ -70,12 +82,12 @@ export class UserApiService {
   //all category apis
   getallcategories() {
     return this.http.get(`${this.url}/api/category/getall`);
-  } 
-  
-  
-  
+  }
+
+
+
   //all comments apis
-  getcommentbyid(_id:any) {
+  getcommentbyid(_id: any) {
     return this.http.get(`${this.url}/api/comment/getsingle/${_id}`);
   }
 
@@ -92,14 +104,14 @@ export class UserApiService {
 
 
 
- //all user apis
- getAuser(_id:any) {
-  return this.http.get(`${this.url}/api/user/getsingle/${_id}`);
-} 
+  //all user apis
+  getAuser(_id: any) {
+    return this.http.get(`${this.url}/api/users/getsingle/${_id}`);
+  }
 
-updateuser(data:any,_id:any) {
-  return this.http.put(`${this.url}/api/user/update/`,{data,_id});
-}
+  updateuser(data: any, _id: any) {
+    return this.http.put(`${this.url}/api/users/update/`, { data, _id });
+  }
 
 
 

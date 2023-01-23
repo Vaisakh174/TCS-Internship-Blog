@@ -15,20 +15,28 @@ export class ReadMorePostComponent {
     this.getdata()
   }
 
-  
-  _id :any
-  post: any={
-    title:'',
-    category:'',
-    user_name:'',
-    Date:'',
-    content:''
+  loaderShow:any
+  _id: any
+  post: any = {
+    title: '',
+    category: '',
+    user_name: '',
+    Date: '',
+    content: ''
   }
-  
+
   getdata() {
-    this.api.getbyidpost(this._id).subscribe((res) => {
-      this.post = res
-      // console.log(this.post)
+    this.loaderShow=true
+    this.api.getbyidpost(this._id).subscribe({
+      next: (res) => {
+        this.post = res
+        // console.log(this.post)
+        this.loaderShow=false
+      },
+      error: (err) => {
+        this.loaderShow=false
+        alert(`Error...  ${err.error}`);
+      }
     })
   }
 

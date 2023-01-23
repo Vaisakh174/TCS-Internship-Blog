@@ -12,6 +12,7 @@ import { ReadMorePostComponent } from './read-more-post/read-more-post.component
 import { EditAPostComponent } from './edit-a-post/edit-a-post.component';
 import { CreatePostComponent } from './create-post/create-post.component';
 import { CreateCategoryComponent } from './create-category/create-category.component';
+import { ReadPostByCategoryComponent } from './read-post-by-category/read-post-by-category.component';
 
 
 @NgModule({
@@ -24,7 +25,8 @@ import { CreateCategoryComponent } from './create-category/create-category.compo
        ReadMorePostComponent,
        EditAPostComponent,
        CreatePostComponent,
-       CreateCategoryComponent
+       CreateCategoryComponent,
+       ReadPostByCategoryComponent
   ],
   imports: [
     CommonModule,

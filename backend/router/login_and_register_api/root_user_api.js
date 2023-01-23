@@ -12,7 +12,7 @@ router.post('/register', async (req, res) => {
         let item = {
             name: req.body.name,
             email: req.body.email,
-            password: req.body.password1,
+            password: req.body.password,
             roles: 'root_user'
         }
         let foundResults = await DB.rootUser.findOne({ email: item.email })
@@ -61,11 +61,11 @@ router.post("/login", async (req, res) => {
             if(isMatch){
                 console.log("success login with jwt user", foundResults.name)
                 let payload = { subject: emailf + passwordf }
-                let token = jwt.sign(payload, "secretkey");
-                let user_id = foundResults._id;
-                let user_name = foundResults.name;
+                let root_token = jwt.sign(payload, "secretkey");
+                let root_id = foundResults._id;
+                let root_name = foundResults.name;
                 let roles = foundResults.roles;
-                res.status(200).send({ token, user_id, user_name, roles, status: 'Login Success' });
+                res.status(200).send({ root_token, root_id, root_name, roles, status: 'Login Success' });
             }
             else{
                 console.log("error 401 invalid password")

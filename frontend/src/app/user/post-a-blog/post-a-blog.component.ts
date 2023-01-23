@@ -17,6 +17,7 @@ export class PostABlogComponent {
   }
 
   categoris :any
+  loaderShow:any
 
   addPost: any = new FormGroup({
     title: new FormControl("", [Validators.required, Validators.minLength(5)]),
@@ -25,20 +26,25 @@ export class PostABlogComponent {
 
   })
 getdata(){
+  this.loaderShow=true
   this.api.getallcategories().subscribe((res)=>{
     this.categoris=res
     // console.log(this.categoris)
+    this.loaderShow=false
   })}
 
   addpost() {
+    this.loaderShow=true
     this.addPost.value = { ...this.addPost.value,"user_id": this.api.getuser_id(), "user_name": this.api.getuser_name() }
     this.api.newpost(this.addPost.value).subscribe({
       next: (res => {
+        this.loaderShow=false
         alert("Data saved successfully");
         // console.log("incoming data from blog post", res);
         this.router.navigate(['userhome/view-blogs']);
       }),
       error: (err => {
+        this.loaderShow=false
         alert(`Error occured ${err.error}`)
         // this.addPost.reset()
       })

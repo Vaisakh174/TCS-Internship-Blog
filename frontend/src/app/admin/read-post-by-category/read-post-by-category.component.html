@@ -1,0 +1,62 @@
+<div *ngIf="api.isLoggedin()" class="d-flex justify-content-center">
+    <div class="p-3 rounded MyBorder my-4 m-2">
+        <div *ngIf="!notFound" class=" rounded  p-3 ">
+
+            <div class="col-12 ">
+                <div class="d-flex justify-content-between">
+                    <div>
+                        <h2>{{posts[i].title}}</h2>
+                        <p>(By : {{posts[i].user_name}})</p>
+                        <p>Category: {{posts[i].category}}</p>
+                        <p>Date: {{posts[i].date}}</p>
+                    </div>
+                    <div>
+                        <div title="Close"> <button routerLink="/adminhome/manage_categorys"
+                                class="btn-danger  my-2 btn btn-sm">Close</button></div>
+                    </div>
+                </div>
+
+                <hr>
+                <p class="justify">{{posts[i].content}}</p>
+
+
+
+            </div>
+            <div class="d-flex justify-content-between">
+                <button (click)="previous()" class="btn btn-warning btn-sm "
+                    title="Click Here For Previous Post">PreviousPost</button>
+
+                <button (click)="next()" class="btn-warning btn btn-sm"
+                    title="Click Here For Next Post">NextPost</button>
+            </div>
+
+        </div>
+
+        <div *ngIf="notFound" class="text-center  p-3">
+
+
+            <div class="d-flex ">
+                <div class="p-2 w-100">
+                    <h2><i>( There Is No Post In This Category )</i></h2>
+                    <small><i>( Please Select Another Category )</i></small>
+                </div>
+                <div class="p-2 flex-shrink-1">
+                    <div title="Close"> <button routerLink="/adminhome/manage_categorys"
+                            class="btn-danger  my-2 btn btn-sm">Close</button></div>
+                </div>
+            </div>
+
+
+        </div>
+
+    </div>
+</div>
+
+<div *ngIf="loaderShow">
+    <div class="loading">
+      <div class="text-center">
+        <div class="spinner-border m-3 text-light " style="width: 3rem; height: 3rem;" role="status"> </div>
+        <h6>Please Wait While Loading...</h6>
+      </div>
+    </div>
+  </div>
