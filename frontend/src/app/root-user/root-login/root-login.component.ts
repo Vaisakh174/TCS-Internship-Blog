@@ -45,7 +45,7 @@ export class RootLoginComponent {
       },
       error: (err) => {
         this.loginform.reset()
-        console.log("error from login ", err);     //to view error in browser
+        // console.log("error from login ", err);     //to view error in browser
         this.loaderShow=false
         alert(`Error...  ${err.error}`);
       

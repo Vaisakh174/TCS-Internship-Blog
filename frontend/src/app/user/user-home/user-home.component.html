@@ -73,11 +73,11 @@
     <div class="d-flex justify-content-between">
       <div>
         <h6>About</h6>
-        <p class="footer-text">The ICTAK Alumni Job Portal is a web-based application that is helpful for users, alumni,
-          employers as well as the ICTAK authorities. The main objective of this system is to design or develop a
-          software portal for ICTAK To study the existing system Searching for more job seekers ( clients) is made
-          easier, reduces manual work, To develop a suitable system for Job entries and searches, to reduce errors at
-          the time of Job entries and search.
+        <p class="footer-text">Our mission at 'Vaisakh's Blog' is to provide a platform for sharing information,
+          stories, and perspectives on topics. We strive to create a welcoming and inclusive community where individuals
+          can come together to learn, engage, and connect with one another. Our goal is to empower and inspire our
+          readers by providing high-quality, informative content that is both educational and thought-provoking. Join us
+          on our journey as we explore the world together through the lens of topics.
         </p>
 
 
@@ -90,9 +90,9 @@
       <div class="mx-5">
         <h6>More</h6>
         <ul class="footer-links ">
-          <li><a routerLink="alumni">Alumni</a></li>
-          <li><a routerLink="employer">Employer</a></li>
-          <li><a routerLink="faculty">Faculty</a></li>
+          <li><a routerLink="user">User</a></li>
+          <!-- <li><a routerLink="employer">Employer</a></li> -->
+          <li><a routerLink="rootuser">RootUser</a></li>
           <li><a routerLink="admin">Admin</a></li>
         </ul>
 
@@ -108,9 +108,9 @@
 
         <h6>Quick Links</h6>
         <ul class="footer-links">
-          <li><a routerLink="/">Home</a></li>
-          <li><a routerLink="/alumnilogin">Sign in</a></li>
-          <li><a routerLink="/alumni">Log in</a></li>
+          <li><a routerLink="/userhome/view-categories">Category</a></li>
+          <li><a routerLink="/userhome/post-a-blog">Create</a></li>
+          <li><a routerLink="/userhome/view-blogs">Posts</a></li>
         </ul>
 
 
@@ -122,8 +122,8 @@
     <div class="container ">
       <div class="row ">
         <div class="col-12">
-          <p class="copyright-text">Copyright &copy; 2022 All Rights Reserved by
-            <a href="">Alumni Job Portal.</a>
+          <p class="copyright-text">Copyright &copy; 2023 All Rights Reserved by
+            <a href="">Vaisakh VS.</a>
           </p>
         </div>
 
@@ -133,12 +133,3 @@
 
   </div>
 </footer>
-
-<div *ngIf="loaderShow">
-  <div class="loading">
-    <div class="text-center">
-      <div class="spinner-border m-3 text-light " style="width: 3rem; height: 3rem;" role="status"> </div>
-      <h6>Please Wait While Loading...</h6>
-    </div>
-  </div>
-</div>

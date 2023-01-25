@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AddAdminComponent } from './add-admin/add-admin.component';
+import { AuthgGuard } from './auth.guard';
 import { EditAdminComponent } from './edit-admin/edit-admin.component';
 import { EditUserComponent } from './edit-user/edit-user.component';
 import { ManageAdminsComponent } from './manage-admins/manage-admins.component';
@@ -11,7 +12,7 @@ import { RootUserHomeComponent } from './root-user-home/root-user-home.component
 const routes: Routes = [
 
   {
-    path: '', component: RootUserHomeComponent,
+    path: '', component: RootUserHomeComponent,canActivate:[AuthgGuard],
     children: [
       { path: '', component: ManageAdminsComponent },
       { path: 'manage_admins', component: ManageAdminsComponent },

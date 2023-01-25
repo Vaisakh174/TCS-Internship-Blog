@@ -1,122 +1,123 @@
 <nav class="navbar navbar-dark navbar-expand-lg  mynav">
-    <div class="container-fluid">
-      <a class="navbar-brand btn  font" routerLink="" title="Click To Go Home">
-        <img src="./assets/Blogger.svg-57f268d63df78c690fe5d003.png" alt="Logo" width="40" height="40"
-          class=" d-inline-block ">
-        Vaisakh's Blog
-      </a>
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
-        aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse " id="navbarSupportedContent">
-        <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+  <div class="container-fluid">
+    <a class="navbar-brand btn  font" routerLink="" title="Click To Go Home">
+      <img src="./assets/Blogger.svg-57f268d63df78c690fe5d003.png" alt="Logo" width="40" height="40"
+        class=" d-inline-block ">
+      Vaisakh's Blog
+    </a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+      aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse " id="navbarSupportedContent">
+      <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
 
-          <li class="nav-item">
-            <a class="nav-link btn my-btn text-white m-2" routerLink="user" routerLinkActive="activednav" [routerLinkActiveOptions]="{exact:true}">Log In As
-              User</a>
-          </li>
+        <li class="nav-item">
+          <a class="nav-link btn my-btn text-white m-2" routerLink="user" routerLinkActive="activednav"
+            [routerLinkActiveOptions]="{exact:true}">Log In As
+            User</a>
+        </li>
 
 
-          <li class="nav-item">
-            <a class="nav-link btn my-btn text-white m-2" routerLink="admin" routerLinkActive="activednav"
-              >Log In As Admin</a>
-          
-          </li>
-  
-         
-  
-          <li class="nav-item">
-            <a class="nav-link btn my-btn text-white m-2" routerLink="rootuser" routerLinkActive="activednav">Log In As
-              Root User</a>
-          </li>
+        <li class="nav-item">
+          <a class="nav-link btn my-btn text-white m-2" routerLink="admin" routerLinkActive="activednav">Log In As
+            Admin</a>
 
+        </li>
+
+
+
+        <li class="nav-item">
+          <a class="nav-link btn my-btn text-white m-2" routerLink="rootuser" routerLinkActive="activednav">Log In As
+            Root User</a>
+        </li>
+
+      </ul>
+    </div>
+  </div>
+</nav>
+
+
+
+
+
+
+
+
+<router-outlet></router-outlet>
+
+
+
+
+
+
+
+
+
+
+
+<footer class="site-footer my-mar mt-md-3 p-4 ">
+  <div class="container-fluid">
+    <div class="d-flex justify-content-between">
+      <div>
+        <h6>About</h6>
+        <p class="footer-text">Our mission at 'Vaisakh's Blog' is to provide a platform for sharing information,
+          stories, and perspectives on topics. We strive to create a welcoming and inclusive community where individuals
+          can come together to learn, engage, and connect with one another. Our goal is to empower and inspire our
+          readers by providing high-quality, informative content that is both educational and thought-provoking. Join us
+          on our journey as we explore the world together through the lens of topics.
+        </p>
+
+
+
+      </div>
+
+
+
+
+      <div class="mx-5">
+        <h6>More</h6>
+        <ul class="footer-links ">
+          <li><a routerLink="user">User</a></li>
+          <!-- <li><a routerLink="employer">Employer</a></li> -->
+          <li><a routerLink="rootuser">RootUser</a></li>
+          <li><a routerLink="admin">Admin</a></li>
         </ul>
+
+
       </div>
+
+
+
+
+
+
+      <div>
+
+        <h6>Quick Links</h6>
+        <ul class="footer-links">
+          <li><a routerLink="/">Home</a></li>
+          <li><a routerLink="/register">Sign in</a></li>
+          <li><a routerLink="/user">Log in</a></li>
+        </ul>
+
+
+      </div>
+
     </div>
-  </nav>
+    <hr>
 
-
-
-
-
-
-
-
-  <router-outlet></router-outlet> 
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  <footer class="site-footer my-mar mt-md-3 p-4 ">
-    <div class="container-fluid">
-      <div class="d-flex justify-content-between">
-        <div>
-          <h6>About</h6>
-          <p class="footer-text">The ICTAK Alumni Job Portal is a web-based application that is helpful for users, alumni,
-            employers as well as the ICTAK authorities. The main objective of this system is to design or develop a
-            software portal for ICTAK To study the existing system Searching for more job seekers ( clients) is made
-            easier, reduces manual work, To develop a suitable system for Job entries and searches, to reduce errors at
-            the time of Job entries and search.
+    <div class="container ">
+      <div class="row ">
+        <div class="col-12">
+          <p class="copyright-text">Copyright &copy; 2023 All Rights Reserved by
+            <a href="">Vaisakh VS.</a>
           </p>
-  
-  
-  
         </div>
-  
-  
-  
-  
-        <div class="mx-5">
-          <h6>More</h6>
-          <ul class="footer-links ">
-            <li><a routerLink="alumni">Alumni</a></li>
-            <li><a routerLink="employer">Employer</a></li>
-            <li><a routerLink="faculty">Faculty</a></li>
-            <li><a routerLink="admin">Admin</a></li>
-          </ul>
-  
-  
-        </div>
-  
-  
-  
-  
-  
-  
-        <div>
-  
-          <h6>Quick Links</h6>
-          <ul class="footer-links">
-            <li><a routerLink="/">Home</a></li>
-            <li><a routerLink="/alumnilogin">Sign in</a></li>
-            <li><a routerLink="/alumni">Log in</a></li>
-          </ul>
-  
-  
-        </div>
-  
+
+
       </div>
-      <hr>
-  
-      <div class="container ">
-        <div class="row ">
-          <div class="col-12">
-            <p class="copyright-text">Copyright &copy; 2022 All Rights Reserved by
-              <a href="">Alumni Job Portal.</a>
-            </p>
-          </div>
-  
-  
-        </div>
-      </div>
-  
     </div>
-  </footer>
+
+  </div>
+</footer>

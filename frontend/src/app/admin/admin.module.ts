@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { AdminRoutingModule } from './admin-routing.module';
 import { AdminLoginComponent } from './admin-login/admin-login.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
 import { AdminHomeComponent } from './admin-home/admin-home.component';
 import { ManagePostsComponent } from './manage-posts/manage-posts.component';
@@ -13,24 +13,32 @@ import { EditAPostComponent } from './edit-a-post/edit-a-post.component';
 import { CreatePostComponent } from './create-post/create-post.component';
 import { CreateCategoryComponent } from './create-category/create-category.component';
 import { ReadPostByCategoryComponent } from './read-post-by-category/read-post-by-category.component';
+import { TokenInterceptorService } from './token-interceptor.service';
+import { AdminApiService } from './admin-api.service';
 
 
 @NgModule({
   declarations: [
-  
+
     AdminLoginComponent,
-       AdminHomeComponent,
-       ManagePostsComponent,
-       ManageCategoryComponent,
-       ReadMorePostComponent,
-       EditAPostComponent,
-       CreatePostComponent,
-       CreateCategoryComponent,
-       ReadPostByCategoryComponent
+    AdminHomeComponent,
+    ManagePostsComponent,
+    ManageCategoryComponent,
+    ReadMorePostComponent,
+    EditAPostComponent,
+    CreatePostComponent,
+    CreateCategoryComponent,
+    ReadPostByCategoryComponent
   ],
   imports: [
     CommonModule,
-    AdminRoutingModule,FormsModule,ReactiveFormsModule,RouterModule,HttpClientModule
+    AdminRoutingModule, FormsModule, ReactiveFormsModule, RouterModule, HttpClientModule
+  ], providers: [AdminApiService,
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: TokenInterceptorService,
+      multi: true
+    }
   ]
 })
 export class AdminModule { }

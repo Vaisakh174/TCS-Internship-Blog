@@ -44,7 +44,7 @@ export class UserLoginComponent {
         this.router.navigate(['/userhome']);
       },
       error: (err) => {
-        console.log("error from login ", err); 
+        // console.log("error from login ", err); 
         this.loaderShow=false    //to view error in browser
         alert(`Error...  ${err.error}`);
         this.loginform.reset()

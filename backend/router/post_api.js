@@ -2,11 +2,11 @@
 const express = require("express");
 const router = express.Router();
 const DB = require("../schema/blog_Schema.js");
-
+const verify = require('../tokenVerifier')
 
 
 //for new post
-router.post('/new', async (req, res) => {
+router.post('/new', verify.verifytoken, async (req, res) => {
     try {
         let item = {
             title: req.body.title,
@@ -51,10 +51,10 @@ router.get('/getall', async (req, res) => {
 });
 
 //get all  by category
-router.get('/category/:category', async (req, res) => {
+router.get('/category/:category', verify.verifytoken, async (req, res) => {
     try {
-        let list = await DB.Post.find({category:req.params.category}).sort({ "_id": -1 });
-        if (list.length>0) {
+        let list = await DB.Post.find({ category: req.params.category }).sort({ "_id": -1 });
+        if (list.length > 0) {
             console.log('Your Posts are Fetched Successfully');
             res.status(200).json(list);
         } else {
@@ -68,10 +68,10 @@ router.get('/category/:category', async (req, res) => {
 });
 
 
-router.get('/search/:_id', async (req, res) => {
+router.get('/search/:_id', verify.verifytoken, async (req, res) => {
     try {
-        let list = await DB.Post.find({user_id:req.params._id}).sort({ "_id": -1 });
-        if (list.length>0) {
+        let list = await DB.Post.find({ user_id: req.params._id }).sort({ "_id": -1 });
+        if (list.length > 0) {
             console.log('Your Posts are Fetched Successfully');
             res.status(200).json(list);
         } else {
@@ -87,12 +87,12 @@ router.get('/search/:_id', async (req, res) => {
 
 
 // fetch single data (get)
-router.get('/getsingle/:id', async (req, res) => {
+router.get('/getsingle/:id', verify.verifytoken, async (req, res) => {
     try {
         let id = req.params.id;
         let list = await DB.Post.findById(id)
         if (list) {
-            console.log('Your Post is Fetched Successfully',id);
+            console.log('Your Post is Fetched Successfully', id);
             res.status(200).json(list)
         } else {
             console.log(`No data found`);
@@ -106,7 +106,7 @@ router.get('/getsingle/:id', async (req, res) => {
 
 
 // delete data
-router.delete('/delete/:id', async (req, res) => {
+router.delete('/delete/:id', verify.verifytoken, async (req, res) => {
     try {
         let id = req.params.id;
         let list = await DB.Post.findByIdAndDelete(id)
@@ -125,7 +125,7 @@ router.delete('/delete/:id', async (req, res) => {
 
 
 // update data
-router.put('/update', async (req, res) => {
+router.put('/update', verify.verifytoken, async (req, res) => {
     try {
         let id = req.body._id;
         let item = {

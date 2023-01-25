@@ -36,7 +36,8 @@ export class EditUserComponent {
     this.api.getAuser(this._id).subscribe((res) => {
       this.user = res
       this.email = this.user.email
-      console.log(this.user)
+      // console.log(this.user)
+      this.editUser.setValue({name:this.user.name,passwors1:"",password2:""})
       this.loaderShow=false
     })
   }

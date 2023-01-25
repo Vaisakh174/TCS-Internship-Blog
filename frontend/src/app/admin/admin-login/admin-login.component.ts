@@ -37,7 +37,7 @@ export class AdminLoginComponent {
       next: (res) => {
 
         localStorage.setItem('admin_token', res.admin_token);
-        console.log("res from login  ", res);   //to view token in browser
+        // console.log("res from login  ", res);   //to view token in browser
         localStorage.setItem('admin_name', res.admin_name);
         localStorage.setItem('admin_id', res.admin_id);
         this.loaderShow=false
@@ -47,7 +47,7 @@ export class AdminLoginComponent {
       },
       error: (err) => {
         this.loginform.reset()
-        console.log("error from login ", err);     //to view error in browser
+        // console.log("error from login ", err);     //to view error in browser
         this.loaderShow=false
         alert(`Error...  ${err.error}`);
 

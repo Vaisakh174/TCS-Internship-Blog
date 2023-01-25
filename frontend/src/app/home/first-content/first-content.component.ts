@@ -16,11 +16,11 @@ export class FirstContentComponent {
   loaderShow:any
 
   posts: any = [{
-    title: 'aaa',
-    content: 'bbb',
-    user_id: 'ccc',
-    user_name: 'ddd',
-    category: 'eee'
+    title: '',
+    content: '',
+    user_id: '',
+    user_name: '',
+    category: ''
   }];
 
   comments: any = [{

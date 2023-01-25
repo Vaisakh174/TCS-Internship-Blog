@@ -2,11 +2,11 @@
 const express = require("express");
 const router = express.Router();
 const DB = require("../schema/blog_Schema.js");
-
+const verify = require('../tokenVerifier')
 
 
 //for new post
-router.post('/new', async (req, res) => {
+router.post('/new', verify.verifytoken, async (req, res) => {
     try {
         let item = {
 
@@ -34,7 +34,7 @@ router.post('/new', async (req, res) => {
 
 
 //get all list (get) for data
-router.get('/getall', async (req, res) => {
+router.get('/getall', verify.verifytoken, async (req, res) => {
     try {
         let list = await DB.Comment.find().sort({ "_id": -1 });
         if (list) {
@@ -53,7 +53,7 @@ router.get('/getall', async (req, res) => {
 
 
 // fetch single data (get)
-router.get('/getsingle/:id', async (req, res) => {
+router.get('/getsingle/:id',  async (req, res) => {
     // console.log('Your Comment is Fetched Successfully',req.params);
 
     try {
@@ -74,7 +74,7 @@ router.get('/getsingle/:id', async (req, res) => {
 
 
 // delete data
-router.delete('/delete/:id', async (req, res) => {
+router.delete('/delete/:id', verify.verifytoken, async (req, res) => {
     try {
         let id = req.params.id;
         let list = await DB.Comment.findByIdAndDelete(id)
@@ -93,7 +93,7 @@ router.delete('/delete/:id', async (req, res) => {
 
 
 // update data
-router.put('/update', async (req, res) => {
+router.put('/update', verify.verifytoken, async (req, res) => {
     try {
         let id = req.body._id;
         let item = {
@@ -105,11 +105,11 @@ router.put('/update', async (req, res) => {
             { $set: item }
         )
         if (list) {
-            console.log('Your Comment is Updated Successfully',item);
+            console.log('Your Comment is Updated Successfully', item);
             res.status(200).json({ status: 'Your Comment is Updated Successfully' });
         } else {
             console.log(`No data found`);
-            res.status(500).send(`No data found`,item);
+            res.status(500).send(`No data found`, item);
         }
     } catch (error) {
         console.log(`Error from Comment put catch:  ${error}`);

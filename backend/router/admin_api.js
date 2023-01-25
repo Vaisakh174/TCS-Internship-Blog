@@ -3,10 +3,10 @@ const express = require("express");
 const router = express.Router();
 const DB = require("../schema/blog_Schema.js");
 const bcrypt = require('bcrypt');
-
+const verify = require('../tokenVerifier')
 
 //adding category data
-router.post('/new', async (req, res) => {
+router.post('/new', verify.verifytoken, async (req, res) => {
     try {
         let item = {
             name: req.body.name,
@@ -40,36 +40,36 @@ router.post('/new', async (req, res) => {
 });
 
 
-router.post('/approve', async (req, res) => {
+router.post('/approve', verify.verifytoken, async (req, res) => {
     try {
 
-        let item = await DB.User.findOne({ _id: req.body._id})
+        let item = await DB.User.findOne({ _id: req.body._id })
         console.log('sss', item)
-        if(item){
+        if (item) {
 
-        
-        let foundResults = await DB.Admin.findOne({ email: item.email })
 
-        if (foundResults == null) {
-            console.log("no matching email found");
-            // Hash the password
-            const salt = await bcrypt.genSalt(10);
-            const hashedPassword = await bcrypt.hash(item.password, salt);
-            item.password = hashedPassword;
-            //Create new user
-            const newdata = new DB.Admin(item);
-            const savedata = await newdata.save();
-            console.log(`from post method, signup ${savedata}`);
-            res.status(200).send({ status: 'Registration Successful' });
+            let foundResults = await DB.Admin.findOne({ email: item.email })
+
+            if (foundResults == null) {
+                console.log("no matching email found");
+                // Hash the password
+                const salt = await bcrypt.genSalt(10);
+                const hashedPassword = await bcrypt.hash(item.password, salt);
+                item.password = hashedPassword;
+                //Create new user
+                const newdata = new DB.Admin(item);
+                const savedata = await newdata.save();
+                console.log(`from post method, signup ${savedata}`);
+                res.status(200).send({ status: 'Registration Successful' });
+            }
+            else {
+                console.log("matching email found");
+                res.status(401).send("Email already registered As a User");
+            }
         }
         else {
-            console.log("matching email found");
-            res.status(401).send("Email already registered As a User");
+            res.status(401).send("User not found");
         }
-    }
-    else{
-        res.status(401).send("User not found");
-    }
 
     } catch (error) {
         console.log(`error from post, signup method ${error}`);
@@ -79,11 +79,11 @@ router.post('/approve', async (req, res) => {
 
 
 //get all list (get) for data
-router.get('/getall', async (req, res) => {
+router.get('/getall', verify.verifytoken, async (req, res) => {
     try {
         let list = await DB.Admin.find().sort({ "_id": -1 });
         if (list) {
-            console.log(`admin data are Fetched Successfully`,list);
+            console.log(`admin data are Fetched Successfully`, list);
             res.status(200).json(list);
         } else {
             console.log(`No data found`);
@@ -98,7 +98,7 @@ router.get('/getall', async (req, res) => {
 
 
 // fetch single data (get)
-router.get('/getsingle/:id', async (req, res) => {
+router.get('/getsingle/:id', verify.verifytoken, async (req, res) => {
     try {
         let id = req.params.id;
         let list = await DB.Admin.findById(id)
@@ -117,7 +117,7 @@ router.get('/getsingle/:id', async (req, res) => {
 
 
 // delete data
-router.delete('/delete/:id', async (req, res) => {
+router.delete('/delete/:id', verify.verifytoken, async (req, res) => {
     try {
         let id = req.params.id;
         let list = await DB.Admin.findByIdAndDelete(id)
@@ -136,7 +136,7 @@ router.delete('/delete/:id', async (req, res) => {
 
 
 // update data
-router.put('/update', async (req, res) => {
+router.put('/update', verify.verifytoken, async (req, res) => {
     try {
         let id = req.body._id;
         let item = {
@@ -167,7 +167,7 @@ router.put('/update', async (req, res) => {
         res.status(500).send(error.message);
     }
 });
-  
+
 
 module.exports = router;
 

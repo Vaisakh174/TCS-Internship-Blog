@@ -16,7 +16,7 @@ import { FirstContentComponent } from './home/first-content/first-content.compon
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule,HttpClientModule
+    AppRoutingModule, HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]

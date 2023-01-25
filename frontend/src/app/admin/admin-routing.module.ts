@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AdminHomeComponent } from './admin-home/admin-home.component';
+import { AuthgGuard } from './auth.guard';
 import { CreateCategoryComponent } from './create-category/create-category.component';
 import { CreatePostComponent } from './create-post/create-post.component';
 import { EditAPostComponent } from './edit-a-post/edit-a-post.component';
@@ -13,7 +14,7 @@ import { ReadPostByCategoryComponent } from './read-post-by-category/read-post-b
 const routes: Routes = [
 
   {
-    path: '', component: AdminHomeComponent,
+    path: '', component: AdminHomeComponent,canActivate:[AuthgGuard],
     children: [
       { path: '', component: ManagePostsComponent },
       { path: 'manage_posts', component: ManagePostsComponent },

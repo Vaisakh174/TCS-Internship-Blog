@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { AuthgGuard } from './auth.guard';
 import { EditPostComponent } from './edit-post/edit-post.component';
 import { EditUserComponent } from './edit-user/edit-user.component';
 import { PostABlogComponent } from './post-a-blog/post-a-blog.component';
@@ -11,7 +12,7 @@ import { ViewCategoriesComponent } from './view-categories/view-categories.compo
 const routes: Routes = [
 
   {
-    path: '', component: UserHomeComponent,
+    path: '', component: UserHomeComponent,canActivate:[AuthgGuard],
     children: [
       { path: '', component: ViewBlogsComponent },
       { path: 'view-blogs', component: ViewBlogsComponent },

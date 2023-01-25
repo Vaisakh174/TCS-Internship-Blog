@@ -53,11 +53,11 @@ export class EditPostComponent {
 
     this.loaderShow=true
     this.editpost.value = { ...this.editpost.value,"user_id": this.api.getuser_id(), "user_name": this.api.getuser_name() }
-    console.log('aas',this.editpost.value)
+    // console.log('aas',this.editpost.value)
     this.api.updatepost(this.editpost.value, this._id).subscribe({
       next: (res => {
         alert("Data saved successfully");
-        console.log("incoming data from blog post", res);
+        // console.log("incoming data from blog post", res);
         this.loaderShow=false
         this.router.navigate(['userhome/view-blogs']);
       }),
