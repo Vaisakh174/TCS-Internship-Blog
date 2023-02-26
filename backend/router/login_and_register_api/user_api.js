@@ -236,7 +236,7 @@ router.post("/forgot", async (req, res) => {
                 subject: 'Password Resetting Link',
                 html: `<h1> Your Link For Password Recovery is below: </h1> 
              <br>
-             <a href="https://cute-gray-trout-kilt.cyclic.app/forgot/${isEmailRegistered._id}">Click Here To Reset Password</a>`
+             <a href="http://localhost:4200/forgot/${isEmailRegistered._id}">Click Here To Reset Password</a>`
             };
             transporter.sendMail(mailOptions, (error, info) => {
                 if (error) {
