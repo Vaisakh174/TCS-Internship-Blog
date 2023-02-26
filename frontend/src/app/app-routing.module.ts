@@ -4,6 +4,7 @@ import { AdminLoginComponent } from './admin/admin-login/admin-login.component';
 import { FirstContentComponent } from './home/first-content/first-content.component';
 import { NavbarComponent } from './home/navbar/navbar.component';
 import { RootLoginComponent } from './root-user/root-login/root-login.component';
+import { ForgotPasswordComponent } from './user/forgot-password/forgot-password.component';
 import { UserLoginComponent } from './user/user-login/user-login.component';
 import { UserRegistrationComponent } from './user/user-registration/user-registration.component';
 
@@ -16,7 +17,8 @@ const routes: Routes = [
       { path: 'admin', component: AdminLoginComponent },
       { path: 'user', component: UserLoginComponent },
       { path: 'register', component: UserRegistrationComponent },
-      { path: 'rootuser', component: RootLoginComponent }
+      { path: 'rootuser', component: RootLoginComponent },
+      { path: 'forgot/:_id', component: ForgotPasswordComponent }
     ]
   },
 

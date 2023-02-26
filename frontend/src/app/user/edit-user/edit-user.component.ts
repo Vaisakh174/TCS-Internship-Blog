@@ -37,7 +37,7 @@ export class EditUserComponent {
       this.user = res
       this.email = this.user.email
       // console.log(this.user)
-      this.editUser.setValue({name:this.user.name,passwors1:"",password2:""})
+      this.editUser.setValue({name:this.user.name,password1:"",password2:""})
       this.loaderShow=false
     })
   }

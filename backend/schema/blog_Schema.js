@@ -9,6 +9,15 @@ const userSchema = new mongoose.Schema({
     roles: String,
     date: { type: String, default: GMT00.getCurrentTimeInIST() }
 });
+
+const otpSchema = new mongoose.Schema({
+
+    email: String,
+    otp: String,
+    timestamp: Number,
+    date: { type: String, default: GMT00.getCurrentTimeInIST() }
+});
+
 const adminSchema = new mongoose.Schema({
     name: String,
     email: String,
@@ -49,10 +58,11 @@ const categorySchema = new mongoose.Schema({
 });
 
 const User = mongoose.model('User', userSchema);
+const Otp = mongoose.model('Otp', otpSchema);
 const rootUser = mongoose.model('RootUser', rootUserSchema);
 const Admin = mongoose.model('Admin', adminSchema);
 const Post = mongoose.model('Post', postSchema);
 const Comment = mongoose.model('Comment', commentSchema);
 const Category = mongoose.model('Category', categorySchema);
 
-module.exports = { User, Admin, rootUser, Post, Comment, Category };
+module.exports = { User, Otp, Admin, rootUser, Post, Comment, Category };

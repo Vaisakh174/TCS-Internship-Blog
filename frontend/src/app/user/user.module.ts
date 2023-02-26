@@ -15,6 +15,7 @@ import { EditUserComponent } from './edit-user/edit-user.component';
 import { ViewCategoriesComponent } from './view-categories/view-categories.component';
 import { TokenInterceptorService } from './token-interceptor.service';
 import { UserApiService } from './user-api.service';
+import { ForgotPasswordComponent } from './forgot-password/forgot-password.component';
 
 
 @NgModule({
@@ -26,7 +27,8 @@ import { UserApiService } from './user-api.service';
     PostABlogComponent,
     EditPostComponent,
     EditUserComponent,
-    ViewCategoriesComponent
+    ViewCategoriesComponent,
+    ForgotPasswordComponent
   ],
   imports: [
     CommonModule,

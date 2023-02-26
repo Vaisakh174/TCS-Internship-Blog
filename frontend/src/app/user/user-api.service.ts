@@ -21,6 +21,27 @@ export class UserApiService {
     return this.http.post<any>(`${this.url}/api/user/register`, data);
   }
 
+  // otp generation
+  generateOtp(data: any) {
+    return this.http.post<any>(`${this.url}/api/user/otp`,data);
+  }
+
+  // otp verify
+  verifyOtp(data: any) {
+    return this.http.post<any>(`${this.url}/api/user/verify`,data);
+  }
+    // forgot password
+  forgotPassword(data: any) {
+    return this.http.post<any>(`${this.url}/api/user/forgot`,data);
+  }
+      //update password for forgot password
+  updatePassword(data: any) {
+    return this.http.put<any>(`${this.url}/api/user/updatePassword`,data);
+  }
+      // get email for forgot password
+  getEmail(_id: any) {
+    return this.http.get<any>(`${this.url}/api/user/getEmail/${_id}`);
+  }
 
 
   //for auth redirect
