@@ -26,12 +26,13 @@ export class UserRegistrationComponent {
   })
   showTimer = false
   countdown = 120;
+  time:any
   timer() {
     this.showTimer = true
-    const timer = setInterval(() => {
+     this.time = setInterval(() => {
       this.countdown--;
       if (this.countdown === 0) {
-        clearInterval(timer);
+        clearInterval(this.time);
         // handle timer expiry
         this.showTimer = false
         alert('Your OTP Is Expired')
@@ -125,7 +126,8 @@ export class UserRegistrationComponent {
           // console.log("success from reg  ", res);   //to view token in browser
           this.loaderShow = false
           alert(res.status);
-
+          clearInterval(this.time);
+          this.showTimer = false
         },
         error: (err) => {
           // console.log("error from reg ", err);     //to view error in browser
